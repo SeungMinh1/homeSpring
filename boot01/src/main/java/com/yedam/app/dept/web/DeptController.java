@@ -35,7 +35,8 @@ public class DeptController {
 
 	// 등록 - 페이지
 	@GetMapping("deptInsert")
-	public String deptInsertForm() {
+	public String deptInsertForm(Model model) {
+		model.addAttribute("deptVO", new DeptVO());
 		return "dept/insert";
 	}
 
@@ -68,13 +69,14 @@ public class DeptController {
 	}
 
 	// 수정 - 처리 : AJAX => QueryString
-	@PostMapping("deptUpdate")
+	//@PostMapping("deptUpdate")
 	@ResponseBody // AJAX용 이라는 annotation
 	public Map<String, Object> deptUpdateAJAXQueryString(DeptVO deptVO) {
 		return deptService.deptUpdate(deptVO);
 	}
 
 	// 수정 - 처리 : AJAX => JSON
+	@PostMapping("deptUpdate")
 	@ResponseBody // AJAX용 이라는 annotation
 	public Map<String, Object> deptUpdateAJAXJSON(@RequestBody DeptVO deptVO) {
 		return deptService.deptUpdate(deptVO);
